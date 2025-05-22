@@ -36,5 +36,21 @@ public class AgendamentoService {
 
     }
 
+    public void listarConsultaPorPaciente(Paciente nomePaciente) {
+        boolean encontrada = false;
+
+        for (Consulta c : consultas) {
+            if (c.getPaciente().getNome().equals(nomePaciente)) {
+                System.out.println("\nConsulta encontrada!");
+                System.out.println(c);
+                encontrada = true;
+            }
+
+            if (!encontrada) {
+                System.out.println("Consulta não foi encontrada.");
+            }
+        }
+    }
+
 
 }

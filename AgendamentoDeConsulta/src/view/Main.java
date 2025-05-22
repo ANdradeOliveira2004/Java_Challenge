@@ -55,14 +55,14 @@ public class Main {
                     Medico medicoEscolhido = medicosDisponiveis.get(escolha - 1);
 
                     Paciente paciente = new Paciente(nome, idade, CPF);
-                    Consulta consulta = new Consulta(data, horario, medicoEscolhido.getNomeMedico());
+                    Consulta consulta = new Consulta(data, horario, medicoEscolhido.getNomeMedico(),paciente);
 
                     //Fazendo o agendamento da consulta
                     consultasAgendadas.agendarConsulta(paciente, consulta);
                     break;
 
                 case  2:
-
+                    consultasAgendadas.listarConsultas();
                     break;
 
             }

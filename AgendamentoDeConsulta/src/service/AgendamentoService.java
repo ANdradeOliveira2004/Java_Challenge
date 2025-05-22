@@ -6,6 +6,7 @@ import model.Paciente;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AgendamentoService {
 
@@ -36,21 +37,22 @@ public class AgendamentoService {
 
     }
 
-    public void listarConsultaPorPaciente(Paciente nomePaciente) {
+    public void listarConsultaPorPaciente(String nomePaciente) {
         boolean encontrada = false;
 
         for (Consulta c : consultas) {
-            if (c.getPaciente().getNome().equals(nomePaciente)) {
+            if (c.getPaciente().getNome().equalsIgnoreCase(nomePaciente)) {
                 System.out.println("\nConsulta encontrada!");
                 System.out.println(c);
                 encontrada = true;
             }
+        }
 
-            if (!encontrada) {
-                System.out.println("Consulta não foi encontrada.");
-            }
+        if (!encontrada) {
+            System.out.println("Nenhuma consulta foi encontrada para o paciente: " + nomePaciente);
         }
     }
+
 
 
 }

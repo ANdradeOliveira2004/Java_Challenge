@@ -4,6 +4,7 @@ import model.Consulta;
 import model.Medico;
 import model.Paciente;
 import service.AgendamentoService;
+import service.FuncionarioService;
 import service.MedicoRepository;
 
 import java.util.ArrayList;
@@ -55,19 +56,66 @@ public class Main {
                     Medico medicoEscolhido = medicosDisponiveis.get(escolha - 1);
 
                     Paciente paciente = new Paciente(nome, idade, CPF);
-                    Consulta consulta = new Consulta(data, horario, medicoEscolhido.getNomeMedico(),paciente);
+                    Consulta consulta = new Consulta(data, horario, medicoEscolhido.getNomeMedico(), paciente);
 
                     //Fazendo o agendamento da consulta
                     consultasAgendadas.agendarConsulta(paciente, consulta);
                     break;
 
-                case  2:
-                    consultasAgendadas.listarConsultas();
+                case 2:
+                    if (fazerLogin()) {
+                        menuFuncionario(consultasAgendadas);
+                    }else {
+                        System.out.println("Lógin invalido!");
+                    }
                     break;
 
             }
         }
+    }
 
+    private static boolean fazerLogin() {
+        Scanner sc = new Scanner(System.in);
+
+
+        System.out.println("Digite seu nome: ");
+        String nome = sc.nextLine();
+
+        System.out.println("Digite seu senha: ");
+        String senha = sc.nextLine();
+
+        return FuncionarioService.autenticar(nome, senha);
 
     }
+
+    private static void menuFuncionario(AgendamentoService consultasAgendadas) {
+        Scanner entrada = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("==== Menu Funcionário ====");
+            System.out.println("1 - Listar Consultas por Paciente");
+            System.out.println("2 - Sair");
+            int opcao = entrada.nextInt();
+            entrada.nextLine(); // Limpa o buffer
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite o nome do paciente:");
+                    String nomePaciente = entrada.nextLine();
+                    consultasAgendadas.listarConsultaPorPaciente(nomePaciente);
+                    break;
+                case 2:
+                    System.out.println("Saindo do menu do funcionário.");
+                    return;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
+        }
+    }
+
 }
+
+
+
+
+

@@ -16,7 +16,7 @@ public class AgendamentoService {
         for (Consulta teste : consultas) {
             boolean comparaHorario = teste.getHorario().equals(consulta.getHorario()) &&
                     teste.getData().equals(consulta.getData()) &&
-                    teste.getMedico().equalsIgnoreCase(consulta.getMedico());
+                    teste.getMedico().equals(consulta.getMedico());
 
             if (comparaHorario) {
                 System.out.println("Consulta já marcada no dia: " + consulta.getData() + " Horario: " + consulta.getHorario() + " Com o médico: " + consulta.getMedico());
@@ -35,5 +35,6 @@ public class AgendamentoService {
         return true;
 
     }
+
 
 }
